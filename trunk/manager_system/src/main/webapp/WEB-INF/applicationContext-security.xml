@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - Sample namespace-based configuration
+  -
+  -->
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http use-expressions="true">
+        <intercept-url pattern="/admin/**" access="hasRole('admin')"/>
+        <intercept-url pattern="/fenxiao/**" access="hasRole('fenxiao')"/>
+        <intercept-url pattern="/fenxiaozhuanyuan/**" access="hasRole('fenxiaozhuanyuan')"/>
+        <intercept-url pattern="/huopin/**" access="hasRole('huopin')"/>
+        <intercept-url pattern="/kefu/**" access="hasRole('kefu')"/>
+        <intercept-url pattern="/public/**" access="hasRole('user')"/>
+        
+        <!--
+        <intercept-url pattern="/secure/**" access="isAuthenticated()" />
+             Allow all other requests. In a real application you should
+             adopt a whitelisting approach where access is not allowed by default
+             <intercept-url pattern="/**" access="permitAll" />
+          -->
+        
+        <form-login />
+        <logout logout-success-url="/loggedout.jsp" delete-cookies="JSESSIONID"/>
+        <remember-me />
+
+        <!-- Uncomment to limit the number of sessions a user can have -->
+        <session-management invalid-session-url="/timeout.jsp">
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+
+    </http>
+
+    <beans:bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+
+    <authentication-manager>
+        <authentication-provider>
+            <!-- <password-encoder ref="encoder"/> -->
+            <user-service>
+                <user name="admin" password="admin" authorities="admin, kefu, fenxiao, fenxiaozhuanyuan, huopin" />
+                <user name="dianne" password="dianne" authorities="kefu" />
+                <user name="scott" password="scott" authorities="fenxiao" />
+                <user name="peter" password="peter" authorities="huopin" />
+                <user name="halen" password="halen" authorities="user" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>
