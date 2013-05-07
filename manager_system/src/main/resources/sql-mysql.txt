@@ -1,0 +1,123 @@
+drop table if exists goods;
+create table goods (
+	id bigint primary key auto_increment, 
+	hid varchar(100), 
+	color varchar(50),
+	weight int, 
+	price int, 
+	thity_four int default 0,
+	thity_five int default 0,
+	thity_six int default 0,
+	thity_seven int default 0,
+	thity_eight int default 0,
+    thity_nine int default 0,
+	forty int default 0,
+	forty_one int default 0,
+	forty_two int default 0,
+	forty_three int default 0,
+	forty_four int default 0,
+	forty_five int default 0,
+	modified timestamp,
+	created timestamp,
+	unique key(hid, color)
+);
+insert into goods values(null, 'goods-1', 'green', 2000, 9900, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, now(), now());
+insert into goods values(null, 'goods-1', 'blue', 2000, 9900, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, now(), now());
+insert into goods values(null, 'goods-2', 'green', 2000, 109, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, now(), now());
+insert into goods values(null, 'goods-2', 'blue', 2000, 109, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, now(), now());
+insert into goods values(null, 'goods-2', 'red', 2000, 109, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, now(), now());
+
+drop table if exists order_detail;
+create table order_detail
+(
+	id bigint primary key auto_increment, 
+	order_id bigint, 
+	goods_id int, 
+	thity_four int default 0,
+	thity_five int default 0,
+	thity_six int default 0,
+	thity_seven int default 0,
+	thity_eight int default 0,
+    thity_nine int default 0,
+	forty int default 0,
+	forty_one int default 0,
+	forty_two int default 0,
+	forty_three int default 0,
+	forty_four int default 0,
+	forty_five int default 0,
+	total_weight int,
+	modified timestamp,
+	created timestamp
+);
+
+drop table if exists user1;
+create table user1 (
+	id int primary key auto_increment,
+	username varchar(100),
+	password varchar(100),
+	enabled tinyint, 
+	modified timestamp,
+	created timestamp,
+	unique key(username)
+);
+insert into user1 values(null, 'admin', 'admin', 1, now(), now());
+insert into user1 values(null, 'halen', 'halen', 1, now(), now());
+insert into user1 values(null, 'xiaoli', 'xiaoli', 1, now(), now());
+
+drop table if exists user_roles;
+create table user_roles (
+	id int primary key auto_increment,
+	user_id int,
+	authority varchar(20),
+	modified timestamp,
+	created timestamp,
+	unique key(user_id, authority)
+);
+insert into user_roles values(null, 1, 'admin', now(), now());
+insert into user_roles values(null, 1, 'caiwu', now(), now());
+insert into user_roles values(null, 1, 'fenxiao', now(), now());
+insert into user_roles values(null, 1, 'fenxiaozhuanyuan', now(), now());
+insert into user_roles values(null, 1, 'huopin', now(), now());
+insert into user_roles values(null, 1, 'kefu', now(), now());
+insert into user_roles values(null, 1, 'user', now(), now());
+insert into user_roles values(null, 2, 'fenxiao', now(), now());
+insert into user_roles values(null, 2, 'user', now(), now());
+insert into user_roles values(null, 2, 'fenxiaozhuanyuan', now(), now());
+insert into user_roles values(null, 2, 'admin', now(), now());
+insert into user_roles values(null, 3, 'fenxiao', now(), now());
+insert into user_roles values(null, 3, 'caiwu', now(), now());
+insert into user_roles values(null, 3, 'user', now(), now());
+
+
+drop table if exists fenxiaoshang;
+create table fenxiaoshang (
+	id int primary key auto_increment,
+	userid int,
+	name varchar(50),
+	deposit bigint, 
+	discount decimal(3, 2), 
+	modified timestamp,
+	created timestamp,
+	unique key(userid)
+);
+insert into fenxiaoshang values(null, 2, 'ÕÅÖ¾Î°', 500000, 0.36, now(), now());
+insert into fenxiaoshang values(null, 3, 'ÐìÏþÀö', 400000, 0.35, now(), now());
+
+drop table if exists order1;
+create table order1 (
+	id bigint primary key auto_increment,
+	order_id bigint,
+	name varchar(50), 
+	phone varchar(20), 
+	address varchar(255), 
+	postcode varchar(20), 
+	kuaidifei int, 
+	total_weight int, 
+	huokuan int, 
+	fenxiaoshang_id int, 
+	status tinyint, 
+	modified timestamp,
+	created timestamp
+);
+	
+	

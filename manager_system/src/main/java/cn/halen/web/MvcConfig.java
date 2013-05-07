@@ -1,4 +1,4 @@
-package cn.halen.config;
+package cn.halen.web;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "cn.halen")
+@ComponentScan(basePackageClasses = {MvcConfig.class})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
     public void addViewControllers(ViewControllerRegistry registry) {
