@@ -71,9 +71,9 @@ create cached table order1 (
 	phone varchar(20), //客户联系电话
 	address varchar(255), //联系地址
 	postcode varchar(20), //邮编
-	kuaidifei bigint, //快递费
+	kuaidifei int, //快递费
 	total_weight int, //所有鞋子的总重量
-	huokuan bigint, //货款
+	huokuan int, //货款
 	fenxiaoshang_id int, //分销商id， 表示这个订单属于这个分销商
 	created timestamp,
 	status tinyint, //表示订单状态

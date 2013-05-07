@@ -1,4 +1,4 @@
-<#macro html title css=[] js=[] custom_css="" custom_js="">
+<#macro html title="欢迎登录动感集团电子商务管理系统" active=1 css=[] js=[] custom_css="" custom_js="">
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,6 +10,7 @@
     <link href="${rc.contextPath}/css/ea.css" rel="stylesheet">
     <link href="${rc.contextPath}/css/jdpicker.css" rel="stylesheet">
     <link href="${rc.contextPath}/css/theme.bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/highslide.css" />
     <#list css as entry>
       <link href="${rc.contextPath}/css/${entry}" rel="stylesheet">
     </#list>
@@ -19,55 +20,69 @@
       
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
       <div class="navbar-inner">
-        <div class="container-fluid">
+        <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">社会主义最民主</a>
+        
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">首页</a></li>
-              <li><a href="#about">关于</a></li>
-              <li><a href="#contact">联系</a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#">尊敬的${username!'无名氏'}，欢迎登录动感集团电子商务管理系统</a></li>
+              <li><a href="/j_spring_security_logout">退出</a></li>
             </ul>
-            <p class="navbar-text pull-right">我代表<a href="#">人名</a></p>
-          </div><!--/.nav-collapse -->
+          </div><!-- /.nav-collapse -->
         </div>
-      </div>
+      </div><!-- /navbar-inner -->
     </div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+          <li <#if active==1> class="active"</#if> ><a href="#">账户管理</a></li>
+          <li <#if active==2> class="active dropdown" <#else>  class="dropdown" </#if> >
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">库存管理 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="${rc.contextPath}/huopin/goods_list">库存列表</a></li>
+                  <li><a href="#">添加商品</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">被间隔的链接</a></li>
+                  <li><a href="#">进货(excel批量导入)</a></li>
+                  <li><a href="#">出货(excel批量导入)</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">订单管理 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="#">动作</a></li>
+                  <li><a href="#">其他动作</a></li>
+                  <li><a href="#">其他</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">被间隔的链接</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">运费模板 <b class="caret bottom-up"></b></a>
+              <ul class="dropdown-menu bottom-up pull-right">
+                    <li><a href="#">动作</a></li>
+                    <li><a href="#">其他动作</a></li>
+                    <li><a href="#">其他</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">被间隔的链接</a></li>
+              </ul>
+          </li>
+        </ul>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span2">
-          <div class="well sidebar-nav" style="padding: 8px 0;">
-            <ul class="nav nav-list">
-              <li class="nav-header">列表头</li>
-              <li class="active"><a href="#"><i class="icon-white icon-home"></i> 首页</a></li>
-              <li><a href="#"><i class="icon-book"></i> 类库</a></li>
-              <li><a href="#"><i class="icon-pencil"></i> 应用</a></li>
-              <li class="nav-header">另一个列表头</li>
-              <li><a href="#"><i class="icon-user"></i> 介绍</a></li>
-              <li><a href="#"><i class="icon-cog"></i> 设置</a></li>
-              <li class="divider"></li>
-              <li><a href="#"><i class="icon-flag"></i> 帮助</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="span8">
-          fsfsfeadsaqfdafeafesgsgdgdgtdrgrg
-          <#nested>
-        </div>
-      </div>
-      </div>
+        <#nested>
     </div>
     
 
     <script src="${rc.contextPath}/js/jquery-min.js"></script>
-    <script src="${rc.contextPath}/js/bootstrap.js"></script>
+    <script src="${rc.contextPath}/js/bootstrap-dropdown.js"></script>
+    <script src="${rc.contextPath}/js/bootstrap-modal.js"></script>
+    <script src="${rc.contextPath}/js/bootstrap-transition.js"></script>
     <script src="${rc.contextPath}/js/jquery.flot.js"></script>
     <script src="${rc.contextPath}/js/jquery.jdpicker.js"></script>
     <script src="${rc.contextPath}/js/jquery.tablesorter.min.js"></script>
@@ -75,7 +90,7 @@
     <!-- Additional files for the Highslide popup effect -->
     <script type="text/javascript" src="${rc.contextPath}/js/highslide-full.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/highslide.config.js" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/highslide.css" />
+    
 
     <#list js as entry>
     <script src="${rc.contextPath}/js/${entry}"></script>
