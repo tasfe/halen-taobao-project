@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import cn.halen.data.pojo.FenXiaoShang;
+import cn.halen.data.pojo.User;
 
 @Repository
 public class FenXiaoShangDao {
@@ -42,8 +43,11 @@ class FenXiaoShangRowMapper implements RowMapper<FenXiaoShang> {
 		FenXiaoShang fenXiaoShang = new FenXiaoShang();
 		fenXiaoShang.setId(rs.getInt("id"));
 		fenXiaoShang.setName(rs.getString("name"));
-		fenXiaoShang.setUsername(rs.getString("username"));
-		fenXiaoShang.setPassword(rs.getString("password"));
+		
+		User user = new User();
+		user.setId(rs.getInt("user_id"));
+		
+		fenXiaoShang.setUser(user);
 		fenXiaoShang.setDeposit(rs.getLong("deposit"));
 		fenXiaoShang.setDiscount(rs.getFloat("discount"));
 		fenXiaoShang.setCreated(rs.getTimestamp("created"));

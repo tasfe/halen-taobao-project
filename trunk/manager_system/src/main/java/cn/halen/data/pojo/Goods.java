@@ -20,6 +20,7 @@ public class Goods {
 	private int forty_three = 0;
 	private int forty_four = 0;
 	private int forty_five = 0;
+	private float discount;
 	private Date created;
 	private Date modified;
 	public long getId() {
@@ -136,6 +137,12 @@ public class Goods {
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
+	public float getDiscount() {
+		return discount;
+	}
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
 	@Override
 	public String toString() {
 		return "Goods [id=" + id + ", hid=" + hid + ", color=" + color
@@ -145,7 +152,8 @@ public class Goods {
 				+ thity_eight + ", thity_nine=" + thity_nine + ", forty="
 				+ forty + ", forty_one=" + forty_one + ", forty_two="
 				+ forty_two + ", forty_three=" + forty_three + ", forty_four="
-				+ forty_four + ", forty_five=" + forty_five + ", created="
-				+ created + ", modified=" + modified + "]";
+				+ forty_four + ", forty_five=" + forty_five + ", discount="
+				+ discount + ", created=" + created + ", modified=" + modified
+				+ "]";
 	}
 }

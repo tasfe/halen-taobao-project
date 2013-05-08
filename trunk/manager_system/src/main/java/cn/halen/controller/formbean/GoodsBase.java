@@ -2,17 +2,14 @@ package cn.halen.controller.formbean;
 
 import java.util.Date;
 
-import javax.validation.constraints.Min;
-
 public class GoodsBase {
 	private long id;
 	private String hid; //款号
 	private String color;
-	@Min(0)
 	private int weight; //重量， 单位：g
-	@Min(0)
 	private int price; //单价， 单位：分
 	private Date modified;
+
 	public long getId() {
 		return id;
 	}

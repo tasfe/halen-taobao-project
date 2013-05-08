@@ -22,6 +22,13 @@ public abstract class BaseValidator {
 		}
 	}
 	
+	public void validNotNegative(int i, String errorMsg) {
+		if(i<0) {
+			success = false;
+			addErrorMsg(errorMsg);
+		}
+	}
+	
 	public ResultInfo validate() {
 		doValidate();
 		ResultInfo info = new ResultInfo();

@@ -19,6 +19,8 @@ public class OrderDetail {
 	private int forty_four;
 	private int forty_five;
 	private int total_weight; //所有鞋子的总重量
+	private float discount;
+	private int status;
 	private Date created;
 	private Date modified;
 	public long getId() {
@@ -129,6 +131,19 @@ public class OrderDetail {
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
+	public float getDiscount() {
+		return discount;
+	}
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
 		return "OrderDetail [id=" + id + ", order=" + order + ", goods="
@@ -139,8 +154,8 @@ public class OrderDetail {
 				+ ", forty_one=" + forty_one + ", forty_two=" + forty_two
 				+ ", forty_three=" + forty_three + ", forty_four=" + forty_four
 				+ ", forty_five=" + forty_five + ", total_weight="
-				+ total_weight + ", created=" + created + ", modified="
-				+ modified + "]";
+				+ total_weight + ", discount=" + discount + ", status="
+				+ status + ", created=" + created + ", modified=" + modified
+				+ "]";
 	}
-	
 }
