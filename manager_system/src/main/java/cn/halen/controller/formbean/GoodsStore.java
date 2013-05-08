@@ -1,5 +1,9 @@
 package cn.halen.controller.formbean;
 
+import java.util.Date;
+
+import cn.halen.service.ResultInfo;
+
 public class GoodsStore {
 	private long id;
 	private int thity_eight = 0;
@@ -9,6 +13,32 @@ public class GoodsStore {
 	private int forty_two = 0;
 	private int forty_three = 0;
 	private int forty_four = 0;
+	private int type = 1; //1:进货    0:出货
+	private Date modified;
+	
+	public void add(GoodsStore goodsStore) {
+		this.thity_eight += goodsStore.getThity_eight();
+		this.thity_nine += goodsStore.getThity_nine();
+		this.forty += goodsStore.getForty();
+		this.forty_one += goodsStore.getForty_one();
+		this.forty_two += goodsStore.getForty_two();
+		this.forty_three += goodsStore.getForty_three();
+		this.forty_four += goodsStore.getForty_four();
+	}
+	
+	public boolean cut(GoodsStore goodsStore) {
+		this.thity_eight -= goodsStore.getThity_eight();
+		this.thity_nine -= goodsStore.getThity_nine();
+		this.forty -= goodsStore.getForty();
+		this.forty_one -= goodsStore.getForty_one();
+		this.forty_two -= goodsStore.getForty_two();
+		this.forty_three -= goodsStore.getForty_three();
+		this.forty_four -= goodsStore.getForty_four();
+		GoodsStoreValidator validator = new GoodsStoreValidator(this);
+		ResultInfo result = validator.validate();
+		return result.isSuccess();
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -56,6 +86,18 @@ public class GoodsStore {
 	}
 	public void setForty_four(int forty_four) {
 		this.forty_four = forty_four;
+	}
+	public Date getModified() {
+		return modified;
+	}
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 	
 }

@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.halen.controller.formbean.GoodsBase;
+import cn.halen.controller.formbean.GoodsStore;
 import cn.halen.data.DataConfig;
 import cn.halen.data.pojo.Goods;
+import cn.halen.exception.UpdateZeroException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DataConfig.class})
@@ -38,21 +42,25 @@ public class GoodsDaoTest {
 	}
 	
 	@Test
-	public void testUpdateGoodsBase() {
+	public void testUpdateGoodsBase() throws UpdateZeroException {
 		Goods goods = goodsDao.get(1L);
 		System.out.println(goods);
 		goods.setColor("blue1");
-		goodsDao.updateBase(goods);
+		GoodsBase goodsBase = new GoodsBase();
+		BeanUtils.copyProperties(goods, goodsBase);
+		goodsDao.updateBase(goodsBase);
 		goods = goodsDao.get(1L);
 		System.out.println(goods);
 	}
 	
 	@Test
-	public void testUpdateGoodsStore() {
+	public void testUpdateGoodsStore() throws UpdateZeroException {
 		Goods goods = goodsDao.get(1L);
 		System.out.println(goods);
 		goods.setThity_four(104);
-		int count = goodsDao.updateStore(goods);
+		GoodsStore goodsStore = new GoodsStore();
+		BeanUtils.copyProperties(goods, goodsStore);
+		int count = goodsDao.updateStore(goodsStore);
 		System.out.println(count);
 		goods = goodsDao.get(1L);
 		System.out.println(goods);

@@ -13,11 +13,12 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
+import cn.halen.controller.formbean.GoodsBase;
+import cn.halen.controller.formbean.GoodsStore;
 import cn.halen.data.pojo.Goods;
+import cn.halen.exception.UpdateZeroException;
 
-@Transactional(rollbackFor=Exception.class)
 @Repository
 public class GoodsDao {
 	
@@ -58,38 +59,43 @@ public class GoodsDao {
 				goods.getForty_two(),
 				goods.getForty_three(),
 				goods.getForty_four(),
-				goods.getForty_five()
+				goods.getForty_five(),
+				goods.getDiscount()
 		});
 		return count;
 	}
 	
-	public int updateStore(final Goods goods) {
-		return jdbcTemplate.update(sqlUpdateGoodsStore, new PreparedStatementSetter() {
+	public int updateStore(final GoodsStore goodsStore) throws UpdateZeroException {
+		int count =  jdbcTemplate.update(sqlUpdateGoodsStore, new PreparedStatementSetter() {
 
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, goods.getThity_four());
-				ps.setInt(2, goods.getThity_five());
-				ps.setInt(3, goods.getThity_six());
-				ps.setInt(4, goods.getThity_seven());
-				ps.setInt(5, goods.getThity_eight());
-				ps.setInt(6, goods.getThity_nine());
-				ps.setInt(7, goods.getForty());
-				ps.setInt(8, goods.getForty_one());
-				ps.setInt(9, goods.getForty_two());
-				ps.setInt(10, goods.getForty_three());
-				ps.setInt(11, goods.getForty_four());
-				ps.setInt(12, goods.getForty_five());
-				ps.setLong(13, goods.getId());
-				ps.setObject(14, goods.getModified());
+				ps.setInt(1, goodsStore.getThity_eight());
+				ps.setInt(2, goodsStore.getThity_nine());
+				ps.setInt(3, goodsStore.getForty());
+				ps.setInt(4, goodsStore.getForty_one());
+				ps.setInt(5, goodsStore.getForty_two());
+				ps.setInt(6, goodsStore.getForty_three());
+				ps.setInt(7, goodsStore.getForty_four());
+				ps.setLong(8, goodsStore.getId());
+				ps.setObject(9, goodsStore.getModified());
 			}
 		});
+		if(count==0) {
+			throw new UpdateZeroException("");
+		}
+		return count;
 	}
 	
-	public int updateBase(Goods goods) {		
-		return jdbcTemplate.update(sqlUpdateGoodsBase, new Object[] {
-			goods.getHid(), goods.getColor(), goods.getWeight(), goods.getPrice(), goods.getId(), goods.getModified()	
+	public int updateBase(GoodsBase goodsBase) throws UpdateZeroException {		
+		int count = jdbcTemplate.update(sqlUpdateGoodsBase, new Object[] {
+				goodsBase.getHid(), goodsBase.getColor(), goodsBase.getWeight(), goodsBase.getPrice(),
+				goodsBase.getId(), goodsBase.getModified()	
 		});
+		if(count==0) {
+			throw new UpdateZeroException("");
+		}
+		return count;
 	}
 	
 	public Goods get(final long id) {
@@ -120,6 +126,7 @@ class GoodsResultSetExtractor implements ResultSetExtractor<Goods> {
 		goods.setForty_three(rs.getInt("forty_three"));
 		goods.setForty_four(rs.getInt("forty_four"));
 		goods.setForty_five(rs.getInt("forty_five"));
+		goods.setDiscount(rs.getFloat("discount"));
 		goods.setCreated(rs.getTimestamp("created"));
 		goods.setModified(rs.getTimestamp("modified"));
 		return goods;
@@ -149,6 +156,7 @@ class GoodsRowMapper implements RowMapper<Goods> {
 		goods.setForty_three(rs.getInt("forty_three"));
 		goods.setForty_four(rs.getInt("forty_four"));
 		goods.setForty_five(rs.getInt("forty_five"));
+		goods.setDiscount(rs.getFloat("discount"));
 		goods.setCreated(rs.getTimestamp("created"));
 		goods.setModified(rs.getTimestamp("modified"));
 		return goods;

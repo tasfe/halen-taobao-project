@@ -2,10 +2,7 @@ package cn.halen.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.json.JSONException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.halen.controller.formbean.GoodsBase;
 import cn.halen.controller.formbean.GoodsBaseValidator;
+import cn.halen.controller.formbean.GoodsStore;
+import cn.halen.controller.formbean.GoodsStoreValidator;
 import cn.halen.data.pojo.Goods;
-import cn.halen.service.GoodsServiceInterface;
 import cn.halen.service.ResultInfo;
+import cn.halen.service.interfac.GoodsServiceInterface;
 
 @Controller
 public class GoodsController {
@@ -35,32 +34,29 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value="huopin/get_goods_by_id")
-	public @ResponseBody GoodsBase getGoodsById(@RequestParam("id") long id) throws JSONException {
+	public @ResponseBody Goods getGoodsById(@RequestParam("id") long id) throws JSONException {
 		
-		//resp.setContentType("text/json");
 		Goods goods = goodsService.getById(id);
-		GoodsBase goodsBase = new GoodsBase();
-		BeanUtils.copyProperties(goods, goodsBase);
-		return goodsBase;
-//		JSONObject json = new JSONObject();
-//		json.put("id", goods.getId());
-//		json.put("hid", goods.getHid());
-//		json.put("color", goods.getColor());
-//		json.put("weight", goods.getWeight());
-//		json.put("price", goods.getPrice());
-//		writer.print(json.toString());
+		return goods;
 	}
 	
 	@RequestMapping(value="huopin/update_goods_base")
-	public @ResponseBody ResultInfo updateGoodsBase(@RequestBody @Valid  GoodsBase goodsBase) {
+	public @ResponseBody ResultInfo updateGoodsBase(@RequestBody GoodsBase goodsBase) {
 		GoodsBaseValidator validator = new GoodsBaseValidator(goodsBase);
 		ResultInfo info = validator.validate();
 		if(!info.isSuccess()) {
 			return info;
 		}
-		
-		Goods goods = new Goods();
-		BeanUtils.copyProperties(goodsBase, goods);
-		return goodsService.updateGoodsBase(goods);
+		return goodsService.updateGoodsBase(goodsBase);
+	}
+	
+	@RequestMapping(value="huopin/update_goods_store")
+	public @ResponseBody ResultInfo updateGoodsStore(@RequestBody GoodsStore goodsStore) {
+		GoodsStoreValidator validator = new GoodsStoreValidator(goodsStore);
+		ResultInfo info = validator.validate();
+		if(!info.isSuccess()) {
+			return info;
+		}
+		return goodsService.updateGoodsStore(goodsStore);
 	}
 }
