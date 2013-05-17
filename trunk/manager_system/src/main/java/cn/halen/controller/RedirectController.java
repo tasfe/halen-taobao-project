@@ -27,15 +27,15 @@ public class RedirectController {
 	
 	@RequestMapping(value="/index")
 	public String index(Model model, HttpServletRequest req) {
-		Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String name = "";
-		if(object instanceof String) {
-			name = (String) object;
-		} else {
-			User user = (User)object;
-			name = user.getUsername();
-		}
-		req.getSession().setAttribute("username", name);
+//		Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		String name = "";
+//		if(object instanceof String) {
+//			name = (String) object;
+//		} else {
+//			User user = (User)object;
+//			name = user.getUsername();
+//		}
+//		req.getSession().setAttribute("username", name);
 		
 		return "index";
 	}

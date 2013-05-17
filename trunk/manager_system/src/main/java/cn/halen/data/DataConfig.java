@@ -3,7 +3,6 @@ package cn.halen.data;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.h2.Driver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -73,24 +72,24 @@ public class DataConfig {
 		return dataSource;
 	}
 
-	public DataSource h2DataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		String url = String.format("jdbc:h2:tcp://%s:%s/%s", h2DbHost, h2DbPort,
-				h2DbName);
-		dataSource.setUrl(url);
-		dataSource.setUsername(h2DbUsername);
-		dataSource.setPassword(h2DbPassword);
-		dataSource.setMaxActive(4);
-		dataSource.setMaxIdle(2);
-		dataSource.setInitialSize(2);
-		dataSource.setRemoveAbandoned(true);
-		dataSource.setRemoveAbandonedTimeout(180);
-		dataSource.setTestOnBorrow(true);
-		// dataSource.setValidationQuery("select sysdate from dual");
-		// dataSource.setValidationQueryTimeout(1);
-		dataSource.setDefaultReadOnly(true);
-		dataSource.setDriverClassName(Driver.class.getName());
-		return dataSource;
-	}
+//	public DataSource h2DataSource() {
+//		BasicDataSource dataSource = new BasicDataSource();
+//		String url = String.format("jdbc:h2:tcp://%s:%s/%s", h2DbHost, h2DbPort,
+//				h2DbName);
+//		dataSource.setUrl(url);
+//		dataSource.setUsername(h2DbUsername);
+//		dataSource.setPassword(h2DbPassword);
+//		dataSource.setMaxActive(4);
+//		dataSource.setMaxIdle(2);
+//		dataSource.setInitialSize(2);
+//		dataSource.setRemoveAbandoned(true);
+//		dataSource.setRemoveAbandonedTimeout(180);
+//		dataSource.setTestOnBorrow(true);
+//		// dataSource.setValidationQuery("select sysdate from dual");
+//		// dataSource.setValidationQueryTimeout(1);
+//		dataSource.setDefaultReadOnly(true);
+//		dataSource.setDriverClassName(Driver.class.getName());
+//		return dataSource;
+//	}
 
 }

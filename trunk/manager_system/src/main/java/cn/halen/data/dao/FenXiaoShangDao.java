@@ -19,6 +19,8 @@ public class FenXiaoShangDao {
 	private String sqlListFenXiaoShang;
 	@Value("${get.fenxiaoshang.by.id}")
 	private String sqlGetFenXiaoShangById;
+	@Value("${get.fenxiaoshang.by.userid}")
+	private String sqlGetByUserId;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -31,6 +33,11 @@ public class FenXiaoShangDao {
 	
 	public FenXiaoShang get(final long id) {
 		FenXiaoShang fenXiaoShang = jdbcTemplate.queryForObject(sqlGetFenXiaoShangById, new Object[] {id}, new FenXiaoShangRowMapper());
+		return fenXiaoShang;
+	}
+	
+	public FenXiaoShang getByUserId(final int userId) {
+		FenXiaoShang fenXiaoShang = jdbcTemplate.queryForObject(sqlGetByUserId, new Object[] {userId}, new FenXiaoShangRowMapper());
 		return fenXiaoShang;
 	}
 }

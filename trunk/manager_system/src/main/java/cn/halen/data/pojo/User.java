@@ -45,5 +45,10 @@ public class User {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", enabled=" + enabled + ", modified=" + modified
+				+ ", created=" + created + "]";
+	}
 }

@@ -37,6 +37,7 @@
                      <a href="#" onClick="modifyBase(${goods.id})">修改商品属性</a> 
                      <a href="#" onClick="modifyStore(${goods.id}, 1)">进货</a>   
                      <a href="#" onClick="modifyStore(${goods.id}, 0)">出货</a> 
+                     <a href="#" onClick="addOrderDetail(${goods.id}, ${orderId})">添加</a>
                 </td>
 	          </tr>
 	        </#list>
@@ -105,6 +106,7 @@
                 <thead>
                   <tr>
                     <th>编号</th>
+                    <th>颜色</th>
                     <th>38</th>
                     <th>39</th>
                     <th>40</th>
@@ -117,6 +119,7 @@
                 <tbody>
                       <tr>
                         <td><input id="store-hid" type="text" class="input-mini"></td>
+                        <td><input id="store-color" type="text" class="input-mini" style="width: 30px;"></td>
                         <td><input id="store-38" type="text" value="0" class="input-mini"  style="width: 30px;"></td>
                         <td><input id="store-39" type="text" value="0" class="input-mini"  style="width: 30px;"></td>
                         <td><input id="store-40" type="text" value="0" class="input-mini"  style="width: 30px;"></td>
@@ -127,6 +130,8 @@
                         <input id="store-id" type="hidden"/>
                         <input id="store-modified" type="hidden"/>
                         <input id="store-type" value="1" type="hidden" />
+                        <input id="goods-id" type="hidden" />
+                        <input id="order-id" type="hidden" value="0"/>
                       </tr>
                 </tbody>
             </table>
@@ -194,11 +199,14 @@
     })
 
 
-    //start 进货
+    //start 进货或者出货
     function modifyStore(id, type) {
         if(type==0) {
             $('#modifyStoreModal-title').html("出货");
             $('#store-type').val(0);
+        } else if(type==2) {
+            $('#modifyStoreModal-title').html("添加商品");
+            $('#store-type').val(2);
         }
         $.ajax({
             type: "get",//使用get方法访问后台
@@ -208,6 +216,7 @@
             success: function(goods){//msg为返回的数据，在这里做数据绑定
                 $('#store-id').val(goods.id);
                 $('#store-hid').val(goods.hid);
+                $('#store-color').val(goods.color);
                 $('#store-modified').val(goods.modified);
                 $('#modifyStoreModal').modal({
                     keyboard: false
@@ -219,7 +228,7 @@
         var goodsStore = '{"id": "' + $("#store-id").val() + '", "thity_eight": "' + $("#store-38").val() + '", "thity_nine": "' 
                           + $("#store-39").val() + '", "forty": "' + $("#store-40").val() + '", "forty_one": "' 
                           + $("#store-41").val() + '", "forty_two": "' + $("#store-42").val() + '", "forty_three": "' + $("#store-43").val() 
-                           + '", "forty_four": "' + $("#store-44").val() + '", "type": "' + $("#store-type").val() + '", "modified": "' + $("#store-modified").val() + '"}';
+                           + '", "forty_four": "' + $("#store-44").val() + '", "orderId": "' + $("#order-id").val() + '", "type": "' + $("#store-type").val() + '", "modified": "' + $("#store-modified").val() + '"}';
         $.ajax({
             type: "post",
             contentType:"application/json; charset=utf-8",
@@ -240,4 +249,12 @@
             }}); 
     }
     // end 进货
+
+    // start 添加order detail
+    function addOrderDetail(goodsId, orderId) {
+        $('#goods-id').val(goodsId);
+        $('#order-id').val(orderId);
+        modifyStore(goodsId, 2);
+    }
+    // end 添加order detail
 </script>
