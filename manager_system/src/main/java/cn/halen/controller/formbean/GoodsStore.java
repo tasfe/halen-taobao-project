@@ -15,6 +15,12 @@ public class GoodsStore {
 	private int forty_four = 0;
 	private int type = 1; //1:进货    0:出货
 	private Date modified;
+	private long orderId;
+	
+	public int getCount() {
+		return thity_eight + thity_nine + forty + forty_one
+				+ forty_two + forty_three + forty_four;
+	}
 	
 	public void add(GoodsStore goodsStore) {
 		this.thity_eight += goodsStore.getThity_eight();
@@ -99,5 +105,12 @@ public class GoodsStore {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
+
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
 }

@@ -48,22 +48,21 @@
                   <li><a href="${rc.contextPath}/huopin/goods_list">库存列表</a></li>
                   <li><a href="#">添加商品</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">被间隔的链接</a></li>
                   <li><a href="#">进货(excel批量导入)</a></li>
                   <li><a href="#">出货(excel批量导入)</a></li>
               </ul>
           </li>
-          <li class="dropdown">
+          <li <#if active==3> class="active dropdown" <#else>  class="dropdown" </#if>>
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">订单管理 <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                  <li><a href="#">动作</a></li>
-                  <li><a href="#">其他动作</a></li>
+                  <li><a href="${rc.contextPath}/order_list">订单列表</a></li>
+                  <li><a href="${rc.contextPath}/fenxiao/add_order_form">新建订单</a></li>
                   <li><a href="#">其他</a></li>
                   <li class="divider"></li>
                   <li><a href="#">被间隔的链接</a></li>
               </ul>
           </li>
-          <li class="dropdown">
+          <li <#if active==4> class="active dropdown" <#else>  class="dropdown" </#if>">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">运费模板 <b class="caret bottom-up"></b></a>
               <ul class="dropdown-menu bottom-up pull-right">
                     <li><a href="#">动作</a></li>

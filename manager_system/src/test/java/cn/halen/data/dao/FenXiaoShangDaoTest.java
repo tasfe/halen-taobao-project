@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.halen.data.DataConfig;
 import cn.halen.data.pojo.FenXiaoShang;
+import cn.halen.service.ServiceConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DataConfig.class})

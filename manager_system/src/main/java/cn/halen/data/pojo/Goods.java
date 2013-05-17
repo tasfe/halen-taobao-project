@@ -1,33 +1,41 @@
 package cn.halen.data.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Goods {
 	private long id;
+	private long tao_id;
 	private String hid; //款号
-	private String color;
+	private String title;
 	private int weight; //重量， 单位：g
-	private int price; //单价， 单位：分
-	private int thity_four = 0;
-	private int thity_five = 0;
-	private int thity_six = 0;
-	private int thity_seven = 0;
-	private int thity_eight = 0;
-    private int thity_nine = 0;
-	private int forty = 0;
-	private int forty_one = 0;
-	private int forty_two = 0;
-	private int forty_three = 0;
-	private int forty_four = 0;
-	private int forty_five = 0;
 	private float discount;
 	private Date created;
 	private Date modified;
+	
+	private List<Sku> skuList;
+	/**
+	 * 用于单元测试
+	 */
+	public void setDefault() {
+		id = 1;
+		tao_id = 1321321321;
+		hid = "goods-1";
+		title = "2013新款潮流女靴";
+		weight = 3000;
+		discount = 0.38F;
+	}
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public long getTao_id() {
+		return tao_id;
+	}
+	public void setTao_id(long tao_id) {
+		this.tao_id = tao_id;
 	}
 	public String getHid() {
 		return hid;
@@ -35,11 +43,11 @@ public class Goods {
 	public void setHid(String hid) {
 		this.hid = hid;
 	}
-	public String getColor() {
-		return color;
+	public String getTitle() {
+		return title;
 	}
-	public void setColor(String color) {
-		this.color = color;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public int getWeight() {
 		return weight;
@@ -47,83 +55,11 @@ public class Goods {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public int getPrice() {
-		return price;
+	public float getDiscount() {
+		return discount;
 	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public int getThity_four() {
-		return thity_four;
-	}
-	public void setThity_four(int thity_four) {
-		this.thity_four = thity_four;
-	}
-	public int getThity_five() {
-		return thity_five;
-	}
-	public void setThity_five(int thity_five) {
-		this.thity_five = thity_five;
-	}
-	public int getThity_six() {
-		return thity_six;
-	}
-	public void setThity_six(int thity_six) {
-		this.thity_six = thity_six;
-	}
-	public int getThity_seven() {
-		return thity_seven;
-	}
-	public void setThity_seven(int thity_seven) {
-		this.thity_seven = thity_seven;
-	}
-	public int getThity_eight() {
-		return thity_eight;
-	}
-	public void setThity_eight(int thity_eight) {
-		this.thity_eight = thity_eight;
-	}
-	public int getThity_nine() {
-		return thity_nine;
-	}
-	public void setThity_nine(int thity_nine) {
-		this.thity_nine = thity_nine;
-	}
-	public int getForty() {
-		return forty;
-	}
-	public void setForty(int forty) {
-		this.forty = forty;
-	}
-	public int getForty_one() {
-		return forty_one;
-	}
-	public void setForty_one(int forty_one) {
-		this.forty_one = forty_one;
-	}
-	public int getForty_two() {
-		return forty_two;
-	}
-	public void setForty_two(int forty_two) {
-		this.forty_two = forty_two;
-	}
-	public int getForty_three() {
-		return forty_three;
-	}
-	public void setForty_three(int forty_three) {
-		this.forty_three = forty_three;
-	}
-	public int getForty_four() {
-		return forty_four;
-	}
-	public void setForty_four(int forty_four) {
-		this.forty_four = forty_four;
-	}
-	public int getForty_five() {
-		return forty_five;
-	}
-	public void setForty_five(int forty_five) {
-		this.forty_five = forty_five;
+	public void setDiscount(float discount) {
+		this.discount = discount;
 	}
 	public Date getCreated() {
 		return created;
@@ -137,23 +73,17 @@ public class Goods {
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
-	public float getDiscount() {
-		return discount;
+	public List<Sku> getSkuList() {
+		return skuList;
 	}
-	public void setDiscount(float discount) {
-		this.discount = discount;
+	public void setSkuList(List<Sku> skuList) {
+		this.skuList = skuList;
 	}
 	@Override
 	public String toString() {
-		return "Goods [id=" + id + ", hid=" + hid + ", color=" + color
-				+ ", weight=" + weight + ", price=" + price + ", thity_four="
-				+ thity_four + ", thity_five=" + thity_five + ", thity_six="
-				+ thity_six + ", thity_seven=" + thity_seven + ", thity_eight="
-				+ thity_eight + ", thity_nine=" + thity_nine + ", forty="
-				+ forty + ", forty_one=" + forty_one + ", forty_two="
-				+ forty_two + ", forty_three=" + forty_three + ", forty_four="
-				+ forty_four + ", forty_five=" + forty_five + ", discount="
+		return "Goods [id=" + id + ", tao_id=" + tao_id + ", hid=" + hid
+				+ ", title=" + title + ", weight=" + weight + ", discount="
 				+ discount + ", created=" + created + ", modified=" + modified
-				+ "]";
+				+ ", skuList=" + skuList + "]";
 	}
 }

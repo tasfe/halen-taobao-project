@@ -1,57 +1,95 @@
+drop table if exists item_prop;
+create table item_prop (
+	id int primary key auto_increment,
+	pid bigint,
+	name varchar(50),
+	modified timestamp,
+	created timestamp,
+	unique key(pid, name)
+);
+
+drop table if exists prop_value;
+create table prop_value (
+	id int primary key auto_increment,
+	vid bigint,
+	name varchar(50),
+	pid bigint,
+	modified timestamp,
+	created timestamp,
+	unique key(vid, name, pid)
+);
+
 drop table if exists goods;
 create table goods (
 	id bigint primary key auto_increment, 
-	hid varchar(100) not null, 
-	color varchar(50) not null,
+	tao_id bigint unique,
+	hid varchar(100) not null unique,
+	title varchar(255), 
 	weight int unsigned, 
-	price int unsigned, 
-	thity_four int unsigned default 0,
-	thity_five int unsigned default 0,
-	thity_six int unsigned default 0,
-	thity_seven int unsigned default 0,
-	thity_eight int unsigned default 0,
-    thity_nine int unsigned default 0,
-	forty int unsigned default 0,
-	forty_one int unsigned default 0,
-	forty_two int unsigned default 0,
-	forty_three int unsigned default 0,
-	forty_four int unsigned default 0,
-	forty_five int unsigned default 0,
 	discount decimal(3, 2) default 0.00,
 	modified timestamp,
-	created timestamp,
-	unique key(hid, color)
+	created timestamp
 );
-insert into goods values(null, 'goods-1', 'green', 2000, 9900, 5, 6, 0, 30, 44, 5, 22, 4, 9, 10, 11, 12, null, now(), now());
-insert into goods values(null, 'goods-1', 'blue', 2000, 9900, 5, 6, 0, 30, 44, 5, 22, 4, 9, 10, 11, 12, null, now(), now());
-insert into goods values(null, 'goods-2', 'green', 2000, 109, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, null, now(), now());
-insert into goods values(null, 'goods-2', 'blue', 2000, 109, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, null, now(), now());
-insert into goods values(null, 'goods-2', 'red', 2000, 109, 5, 6, 11, 30, 44, 5, 22, 4, 9, 10, 11, 12, null, now(), now());
+
+drop table if exists area;
+create table area (
+	id bigint primary key,
+	name varchar(50),
+	parent_id bigint,
+	type bigint,
+	modified timestamp,
+	created timestamp
+	);
+
+drop table if exists sku;
+create table sku (
+	id bigint primary key auto_increment,
+	tao_id bigint unsigned,
+	goods_id varchar(100),
+	color varchar(20),
+	size varchar(20),
+	price int unsigned,
+	quantity int unsigned,
+	modified timestamp,
+	created timestamp,
+	unique key(goods_id, color, size)
+);
+
+drop table if exists order1;
+create table order1 (
+	id bigint primary key auto_increment,
+	tao_id bigint unique not null,
+	name varchar(50) not null, 
+	phone varchar(20) not null, 
+	address varchar(255) not null, 
+	postcode varchar(20), 
+	delivery varchar(20) not null,
+	delivery_money int unsigned not null,
+	template_id int unsigned not null, 
+	total_weight int unsigned, 
+	goods_count int unsigned,
+	huokuan int unsigned, 
+	fenxiaoshang_id int unsigned, 
+	status tinyint, 
+	modified timestamp,
+	created timestamp
+);
 
 drop table if exists order_detail;
 create table order_detail
 (
 	id bigint primary key auto_increment, 
 	order_id bigint unsigned not null, 
-	goods_id int unsigned not null, 
-	thity_four int unsigned default 0,
-	thity_five int unsigned default 0,
-	thity_six int unsigned default 0,
-	thity_seven int unsigned default 0,
-	thity_eight int unsigned default 0,
-    thity_nine int unsigned default 0,
-	forty int unsigned default 0,
-	forty_one int unsigned default 0,
-	forty_two int unsigned default 0,
-	forty_three int unsigned default 0,
-	forty_four int unsigned default 0,
-	forty_five int unsigned default 0,
-	total_weight int unsigned default 0,
+	sku_id int unsigned not null, 
+	quantity int unsigned,
+	price int unsigned,
 	discount decimal(3, 2), 
+	weight int unsigned default 0,
+	huokuan int unsigned,
 	status tinyint default 1,
 	modified timestamp,
 	created timestamp,
-	unique key(order_id, goods_id)
+	unique key(order_id, sku_id)
 );
 
 drop table if exists user1;
@@ -102,29 +140,13 @@ create table fenxiaoshang (
 	discount decimal(3, 2), 
 	modified timestamp,
 	created timestamp,
-	unique key(userid)
+	unique key(user_id)
 );
+insert into fenxiaoshang values(null, 1, '张志东', 500000, 0.36, now(), now());
 insert into fenxiaoshang values(null, 2, '张志伟', 500000, 0.36, now(), now());
 insert into fenxiaoshang values(null, 3, '徐晓丽', 400000, 0.35, now(), now());
 
-drop table
 
-drop table if exists order1;
-create table order1 (
-	id bigint primary key auto_increment,
-	order_id bigint unique not null,
-	name varchar(50) not null, 
-	phone varchar(20) not null, 
-	address varchar(255) not null, 
-	postcode varchar(20), 
-	template_id int unsigned not null, 
-	total_weight int unsigned, 
-	huokuan int unsigned, 
-	fenxiaoshang_id int unsigned, 
-	status tinyint, 
-	modified timestamp,
-	created timestamp
-);
 
 drop table if exists province;
 create table province (
